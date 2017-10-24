@@ -1,23 +1,23 @@
 {
   "name": "sass-to-css-variables",
   "version": "1.0.1",
-  "description": "Convert stylesheets from $ variables to use CSS variables",
+  "description": "Convert stylesheets from CSS variables to use SASS $ variables",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha test/test.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/samuelthomps0n/sass-to-css-variables.git"
+    "url": "git+ssh://git@github.com/xnyl/css-variables-to-sass.git"
   },
   "keywords": [
     "SASS",
     "CSS",
     "SCSS"
   ],
-  "author": "Samuel Thompson <sam@samuelthompson.co.uk>",
+  "author": "Tomasz Rozmus <tomasz.rozmus@gmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/samuelthomps0n/sass-to-css-variables#readme",
+  "homepage": "https://github.com/xnyl/css-variables-to-sass",
   "dependencies": {
     "q": "^1.5.0",
     "glob": "^7.1.2",
