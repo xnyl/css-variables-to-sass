@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+var path = require('path');
+var sassToCssVars = require('../');
+var program = require('commander');
+
+program
+    .version('0.0.1')
+    .usage(
+        '<file ...>\n\n $ to var(-- ) variables')
+    .option('-o --output <file ...>', 'Destination of ouput')
+
+program.parse(process.argv);
+
+var src = program.args;
+var dest = program.output;
+
+
+if(Array.isArray(src)) {
+    src.forEach(function(file) {
+        return sassToCssVars.convert(file, dest);
+    });
+} else {
+    return sassToCssVars.convert(src, dest);
+}
