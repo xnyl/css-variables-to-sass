@@ -6,6 +6,8 @@ const glob = require('glob');
 
 const ROOT = ':root';
 const VAR = ' var';
+const CSS_VAR = '--';
+const SASS_VAR = '$';
 const CALC = ' calc';
 const OPENING_PARENTHESES = '{';
 const CLOSING_PARENTHESES = '}';
@@ -13,6 +15,7 @@ const OPENING_BRACKET = '(';
 const CLOSING_BRACKET = ')';
 const SPACE = ' ';
 const EMPTY = '';
+
 
 function replaceAt(string, index, char = SPACE) {
     if (index > string.length - 1) return string;
@@ -67,7 +70,7 @@ function variableCleanup(content){
                 }
             }
         }
-        content = content.replace(VAR, '');
+        content = content.replace(VAR, EMPTY);
 
         return content;
     }
@@ -94,11 +97,19 @@ function calcCleanup(content){
                 }
             }
         }
-        content = content.replace(CALC, '');
+        content = content.replace(CALC, EMPTY);
 
         return content;
     }
 }
+
+function replaceIfNotPrecededBy(notPrecededBy, replacement) {
+    return function(match) {
+        return match.slice(0, notPrecededBy.length) === notPrecededBy
+            ? match
+            : replacement;
+    }
+};
 
 module.exports = {
 
@@ -117,16 +128,17 @@ module.exports = {
                 content = calcCleanup(content);
             }
 
-            content = content.replace(/--/g, '$');
+            let pattern = '[^a-zA-Z0-9](--([a-zA-Z0-9]+))';
+            let variableRegexp = new RegExp(pattern, "g");
+            content = content.replace(variableRegexp, '$$$2');
 
-
-            let rebuiltFile = content;
+            let newContent = content;
 
             if (dest) {
                 let outputFile = fs.createWriteStream(dest);
 
                 outputFile.once('open', function (fd) {
-                    outputFile.write(rebuiltFile);
+                    outputFile.write(newContent);
                     outputFile.end();
                 });
                 outputFile.on('close', function () {
@@ -136,7 +148,7 @@ module.exports = {
                 let outputFile = fs.createWriteStream(src);
 
                 outputFile.once('open', function (fd) {
-                    outputFile.write(rebuiltFile);
+                    outputFile.write(newContent);
                     outputFile.end();
                 });
                 outputFile.on('close', function () {

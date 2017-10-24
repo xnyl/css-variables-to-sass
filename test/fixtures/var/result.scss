@@ -1,13 +1,13 @@
   
-    $variable: 10px;
-    $variable2: 15px;
+   $variable: 10px;
+   $variable2: 15px;
  
 
 .element{
-    height: $variable;
+    height:$variable;
 }
 
 .otherElement{
-    height: $variable2;
+    height:$variable2;
 }
 

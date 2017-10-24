@@ -50,5 +50,9 @@ describe('css-variables-to-sass', function () {
         jsTest('calc', {}, done);
     });
 
+    it('respects BEM-like element--modifiers', function (done) {
+        jsTest('bem', {}, done);
+    });
+
 });
 
