@@ -1,0 +1,12 @@
+
+  $variable: 10px;
+  $variable2: 15px;
+
+
+.element{
+  height: $variable;
+}
+
+.otherElement{
+    height: $variable2;
+}

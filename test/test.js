@@ -1,32 +1,54 @@
-const should = require('should'),
+const //should = require('should'),
     fs = require('fs'),
     path = require('path'),
-    plugin = require('../');
+    plugin = require('../'),
+    chai = require('chai');
+
+    chai.use(require('chai-string'));
+    const expect = chai.expect;
 
 
 let jsTest = function (fixture, options, done) {
     "use strict";
 
-    let expected = path.join(__dirname, 'fixtures', fixture + '.expected.css')
-    let source = path.join(__dirname, 'fixtures', fixture + '.css')
-    let destination = path.join(__dirname, 'fixtures', fixture + '.actual.css')
+    let expectedPath = path.join(__dirname, 'fixtures', fixture,  'expected.scss')
+    let sourcePath = path.join(__dirname, 'fixtures', fixture,  'source.css')
+    let destinationPath = path.join(__dirname, 'fixtures', fixture,  'result.scss')
 
-    let expectedOutput = fs.readFileSync(expected, 'utf8');
+    let expected = fs.readFileSync(expectedPath, 'utf8');
 
-    plugin.convert(source, destination).then(function(file) {
+    plugin.convertFile(sourcePath, destinationPath).then(function(file) {
 
-        let result = fs.readFileSync(destination, 'utf8')
-        result.should.eql(expectedOutput);
+        let result = fs.readFileSync(destinationPath, 'utf8');
+        compareWisely(result, expected);
         done();
     }).catch(function(err) {
         console.log(err);
     })
-}
+};
+
+
+let sanitize = function(content){
+    return content.replace(/\s/g, " ");
+};
+
+let compareWisely = function(result, expected){
+    chai.expect(sanitize(result)).to.equalIgnoreSpaces(sanitize(expected));
+};
 
 describe('css-variables-to-sass', function () {
 
+    it('removes :root { } entries', function (done) {
+        jsTest('root', {}, done);
+    });
+
     it('converts var(--xxx) variables to $ variables', function (done) {
-        jsTest('test', {}, done);
+        jsTest('simple', {}, done);
+    });
+
+    xit('converts calc(...) variables to #{...}  interpolations', function (done) {
+        jsTest('calc', {}, done);
     });
 
 });
+

@@ -1,0 +1,8 @@
+  
+    $baseline: 4px;
+    $xsmallFont: calc(3 * $baseline);
+ 
+
+.element{
+    height: calc(3 * $xsmallFont);
+}

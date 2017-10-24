@@ -1,0 +1,9 @@
+:root {
+    --variable: 10px;
+}
+
+.element{
+    height: var(--variable);
+}
+
+

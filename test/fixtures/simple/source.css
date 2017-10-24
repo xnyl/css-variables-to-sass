@@ -1,0 +1,13 @@
+:root {
+    --variable: 10px;
+    --variable2: 15px;
+}
+
+.element{
+    height: var(--variable);
+}
+
+.otherElement{
+    height: var(--variable2);
+}
+
