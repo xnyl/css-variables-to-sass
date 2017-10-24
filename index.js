@@ -75,7 +75,7 @@ function variableCleanup(content){
 
 
 function calcCleanup(content){
-    let calcIndex = content.indexOf(VAR);
+    let calcIndex = content.indexOf(CALC);
     if (calcIndex !== -1) {
         let calcOpening = content.indexOf(OPENING_BRACKET, calcIndex),
             opening = 0,
@@ -106,72 +106,6 @@ module.exports = {
 
         return new Promise((resolve, reject) => {
 
-            let sourceSassStream = lineReader.createInterface({
-                input: fs.createReadStream(src)
-            })
-
-            let rebuiltFile = '';
-
-            sourceSassStream.on('line', function (line) {
-
-                let rebuiltLine = line.replace('--', '$', 'g');
-
-
-                rebuiltFile += rebuiltLine;
-                // let currentLineWords = line.split(' ');
-                // let rebuiltLine = '';
-                //
-                // currentLineWords.forEach(function(value, index) {
-                //
-                //     if(value.includes('$')) {
-                //         let oldVariable = value.substring(value.indexOf('$')).replace(/;|,| |\)/g, '');
-                //         value = value.replace(oldVariable, 'var(--' + oldVariable.replace('$', '') + ')');
-                //     }
-                //
-                //     if(index > 0) {
-                //         return rebuiltLine += ' ' + value;
-                //     }
-                //     return rebuiltLine += value;
-                //
-                // });
-                //
-                // rebuiltLine = rebuiltLine.replace('    ', '\t') + '\n';
-                // rebuiltFile += rebuiltLine;
-
-            });
-
-            sourceSassStream.on('close', function (line) {
-                if (dest) {
-                    let outputFile = fs.createWriteStream(dest);
-
-                    outputFile.once('open', function (fd) {
-                        outputFile.write(rebuiltFile);
-                        outputFile.end();
-                    });
-                    outputFile.on('close', function () {
-                        resolve(dest)
-                    });
-                } else {
-                    let outputFile = fs.createWriteStream(src);
-
-                    outputFile.once('open', function (fd) {
-                        outputFile.write(rebuiltFile);
-                        outputFile.end();
-                    });
-                    outputFile.on('close', function () {
-                        resolve(src);
-                    });
-                }
-            });
-
-        });
-
-    },
-
-    convertFile: function (src, dest) {
-
-        return new Promise((resolve, reject) => {
-
             let content = fs.readFileSync(src, 'utf8');
 
             content = rootCleanup(content);
@@ -179,9 +113,9 @@ module.exports = {
                 content = variableCleanup(content);
             }
 
-            // while(content.indexOf(CALC) !== -1){
-            //     content = calcCleanup(content);
-            // }
+            while(content.indexOf(CALC) !== -1){
+                content = calcCleanup(content);
+            }
 
             content = content.replace(/--/g, '$');
 

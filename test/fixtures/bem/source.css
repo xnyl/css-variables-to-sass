@@ -1,0 +1,12 @@
+:root {
+    --baseline: 4px;
+    --xsmallFont: calc(3 * var(--baseline));
+}
+
+.element{
+    height: calc(3 * var(--xsmallFont));
+}
+
+.element--modifier{
+    height: calc(3 * var(--xsmallFont));
+}
