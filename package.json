@@ -1,8 +1,11 @@
 {
   "name": "css-variables-to-sass",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1-alpha.2",
   "description": "Convert stylesheets from CSS --variables to SASS $variables",
   "main": "index.js",
+  "bin": {
+    "css-variables-to-sass": "./bin/css-variables-to-sass"
+  },
   "scripts": {
     "test": "./node_modules/.bin/mocha test/test.js -w"
   },
@@ -10,6 +13,7 @@
     "type": "git",
     "url": "git+ssh://git@github.com/xnyl/css-variables-to-sass.git"
   },
+
   "keywords": [
     "SASS",
     "CSS",
