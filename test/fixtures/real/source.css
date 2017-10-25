@@ -1,0 +1,114 @@
+:root{
+    --baseline: 4px;
+
+    --small: 600px;
+    --medium: 900px;
+    --big: 1200px;
+
+    --maxHeroWidthDesktop: 1440px;
+    --maxContentWidthDesktop: 1200px;
+    --maxTextWidthDesktop: 774px;
+    --maxContentWidthTablet: 800px;
+    --maxContentWidthMobile: 480px;
+
+    --gutterThin: calc(4 * var(--baseline));
+    --gutterWide: calc(6 * var(--baseline));
+
+    --gutterThinGridPadding: calc(2 * var(--baseline));
+    --gutterWideGridPadding: calc(3 * var(--baseline));
+
+    --xsmallFont: calc(3 * var(--baseline));
+    --smallFont: calc(4 * var(--baseline));
+    --normalFont: calc(5 * var(--baseline));
+    --iconSizeFont: calc(6 * var(--baseline));
+
+    --smallerFont: 15px;
+    --smallerFontLineHeight: 20px;
+
+    --buttonHeight: 40px;
+    --buttonPadding: 24px;
+    --buttonSmallHeight: 22px;
+    --bold: 700;
+
+    --black: #000;
+    --gray01: #262626;
+    --gray02: #6e6e6e;
+    --gray03: #a9a9a9;
+    --gray04: #d2d2d2;
+    --gray05: #f0f0f0;
+    --gray06: #fafafa;
+    --red: #FF000F;
+    --darkRed: #cc000c;
+    --white: #FFFFFF;
+    --baseFontColor: var(--gray01);
+
+    /*math rule +2 -2 base line*/
+    --headingH1: calc(18 * var(--baseline));
+    --lineHeightH1: calc(20 * var(--baseline));
+    --marginBottomH1: calc(16 * var(--baseline));
+
+    --headingH2: calc(13 * var(--baseline));
+    --lineHeightH2: calc(15 * var(--baseline));
+    --marginBottomH2: calc(11 * var(--baseline));
+
+    /*--headingH3: calc(6 * var(--baseline));*/
+    --headingH3: 25px;
+    --lineHeightH3: calc(8 * var(--baseline));
+    --marginBottomH3: calc(6 * var(--baseline));
+
+    --defaultLineHeight: calc(6 * var(--baseline));
+
+    --defaultMargin: calc(6 * var(--baseline));
+    --defaultPadding: calc(6 * var(--baseline));
+
+    --defaultSmallMargin: calc(4 * var(--baseline));
+    --defaultSmallDistance: calc(4 * var(--baseline));
+
+    --defaultDistance: calc(12 * var(--baseline));
+    --defaultLargeDistance: calc(18 * var(--baseline));
+
+    --fontFamily: ABBvoice, Verdana, Arial, Sans-serif;
+
+    --icon-dowload: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PHN0eWxlPi5he2ZpbGwtb3BhY2l0eTpudWxsO2ZpbGw6bm9uZTtzdHJva2UtbGluZWpvaW46dW5kZWZpbmVkO3N0cm9rZS1vcGFjaXR5Om51bGw7c3Ryb2tlLXdpZHRoOjI7c3Ryb2tlOiMwMDA7fTwvc3R5bGU+PHRpdGxlPiAgYmFja2dyb3VuZDwvdGl0bGU+PHJlY3QgaGVpZ2h0PSIyMiIgd2lkdGg9IjIyIiB5PSItMSIgeD0iLTEiIGZpbGw9IiNmZmYiLz48ZyBoZWlnaHQ9IjEwMCIgd2lkdGg9IjEwMCI+PHJlY3QgaGVpZ2h0PSIxMDAiIHdpZHRoPSIxMDAiIGZpbGw9InVybCgjZ3JpZHBhdHRlcm4pIi8+PC9nPjx0aXRsZT4gIExheWVyIDE8L3RpdGxlPjxsaW5lIHkyPSIxNCIgeDI9IjEwIiB5MT0iMC4xIiB4MT0iMTAiIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlLWxpbmVqb2luOnVuZGVmaW5lZDtzdHJva2Utd2lkdGg6MjtzdHJva2U6IzAwMCIvPjxsaW5lIHRyYW5zZm9ybT0icm90YXRlKC00NSA2Ljg4NzYzNjY2MTUyOTU0MiAxMC40MDU3ODkzNzUzMDUxNzQpIiB5Mj0iMTQuNCIgeDI9IjYuOSIgeTE9IjYuNCIgeDE9IjYuOSIgY2xhc3M9ImEiLz48bGluZSB0cmFuc2Zvcm09InJvdGF0ZSg0NSAxMy4yMjE3ODU1NDUzNDkxMjYgMTAuMzU4OTY0OTIwMDQzOTQ0KSIgeTI9IjE0LjUiIHgyPSIxMy4yIiB5MT0iNi4yIiB4MT0iMTMuMiIgY2xhc3M9ImEiLz48bGluZSB5Mj0iMTkiIHgyPSIxNy4zIiB5MT0iMTkiIHgxPSIyLjciIGNsYXNzPSJhIi8+PGxpbmUgeTI9IjE3IiB5MT0iMTciIHgxPSIyLjYiIGNsYXNzPSJhIi8+PGxpbmUgeTI9IjE3IiB4Mj0iMTcuMyIgeTE9IjE3IiB4MT0iMTkuOSIgY2xhc3M9ImEiLz48L3N2Zz4=);
+
+    --icon-arrowDown: "\e91e";
+    --icon-arrowLeft: "\e91f";
+    --icon-arrowRight: "\e920";
+    --icon-arrowUp: "\e921";
+    --icon-advertising: "\e900";
+    --icon-chart: "\e901";
+    --icon-close: "\e902";
+    --icon-cobranding: "\e903";
+    --icon-compare: "\e904";
+    --icon-coreElements: "\e905";
+    --icon-digitalMedia: "\e906";
+    --icon-download: "\e907";
+    --icon-environmental: "\e908";
+    --icon-fileExcel: "\e909";
+    --icon-fileImage: "\e90a";
+    --icon-logIn: "\e90b";
+    --icon-logOut: "\e90c";
+    --icon-mail: "\e90d";
+    --icon-menu: "\e90e";
+    --icon-positioning: "\e90f";
+    --icon-printMedia: "\e910";
+    --icon-print: "\e911";
+    --icon-product: "\e912";
+    --icon-search: "\e913";
+    --icon-socialFacebook: "\e914";
+    --icon-socialGoogleplus: "\e915";
+    --icon-socialLinkedin: "\e916";
+    --icon-socialTwitter: "\e917";
+    --icon-socialYoutube: "\e918";
+    --icon-viewBar: "\e919";
+    --icon-viewChart: "\e91a";
+    --icon-viewTable: "\e91b";
+    --icon-zoomIn: "\e91c";
+    --icon-zoomOut: "\e91d";
+    --baseDropdownHeight: 56px;
+}
+
+
+@custom-media --mobile (max-width: 759px);
+@custom-media --tablet (min-width: 760px) and (max-width: 1199px);
+@custom-media --desktop (min-width: 1200px);

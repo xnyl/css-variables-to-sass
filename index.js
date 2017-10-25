@@ -1,13 +1,10 @@
 const path = require('path');
 const fs = require('fs');
-const lineReader = require('readline');
 const glob = require('glob');
 
 
 const ROOT = ':root';
 const VAR = ' var';
-const CSS_VAR = '--';
-const SASS_VAR = '$';
 const CALC = ' calc';
 const OPENING_PARENTHESES = '{';
 const CLOSING_PARENTHESES = '}';
@@ -22,9 +19,9 @@ function replaceAt(string, index, char = SPACE) {
     return string.substr(0, index) + char + string.substr(index + 1);
 }
 
-function rootCleanup(content){
-    let rootIndex = content.indexOf(':root');
-    if (rootIndex !== -1) {
+function cleanupRoot(content) {
+    let rootIndex;
+    while ((rootIndex = content.indexOf(ROOT)) !== -1) {
         let rootOpening = content.indexOf(OPENING_PARENTHESES, rootIndex),
             opening = 0,
             closing = 0;
@@ -43,16 +40,14 @@ function rootCleanup(content){
             }
 
         }
-        content = content.replace(ROOT, '');
-
-        return content;
+        content = content.replace(ROOT, EMPTY);
     }
-
+    return content;
 }
 
-function variableCleanup(content){
-    let variableIndex = content.indexOf(VAR);
-    if (variableIndex !== -1) {
+function cleanupVar(content) {
+    let variableIndex;
+    while ((variableIndex = content.indexOf(VAR)) !== -1) {
         let variableOpening = content.indexOf(OPENING_BRACKET, variableIndex),
             opening = 0,
             closing = 0;
@@ -63,7 +58,7 @@ function variableCleanup(content){
             }
             else if (content[i] === CLOSING_BRACKET) {
                 closing++;
-                if (closing === opening) { //we found root closing parentheses
+                if (closing === opening) { //we found var closing bracket
                     content = replaceAt(content, variableOpening);
                     content = replaceAt(content, i, EMPTY);
                     break;
@@ -72,14 +67,14 @@ function variableCleanup(content){
         }
         content = content.replace(VAR, EMPTY);
 
-        return content;
     }
+    return content;
 }
 
 
-function calcCleanup(content){
-    let calcIndex = content.indexOf(CALC);
-    if (calcIndex !== -1) {
+function cleanupCalc(content) {
+    let calcIndex;
+    while (calcIndex = content.indexOf(CALC) !== -1) {
         let calcOpening = content.indexOf(OPENING_BRACKET, calcIndex),
             opening = 0,
             closing = 0;
@@ -99,17 +94,31 @@ function calcCleanup(content){
         }
         content = content.replace(CALC, EMPTY);
 
-        return content;
     }
+    return content;
+
 }
 
-function replaceIfNotPrecededBy(notPrecededBy, replacement) {
-    return function(match) {
-        return match.slice(0, notPrecededBy.length) === notPrecededBy
-            ? match
-            : replacement;
-    }
-};
+function replaceVars(content){
+    const pattern = '([^a-zA-Z0-9])(--([a-zA-Z0-9]+))';
+    let variableRegexp = new RegExp(pattern, "g");
+    content = content.replace(variableRegexp, '$1$$$3');
+
+    return content;
+}
+
+function processContent(content){
+
+    content = cleanupRoot(content);
+
+    content = cleanupVar(content);
+
+    content = cleanupCalc(content);
+
+    content = replaceVars(content);
+
+    return content;
+}
 
 module.exports = {
 
@@ -119,26 +128,13 @@ module.exports = {
 
             let content = fs.readFileSync(src, 'utf8');
 
-            content = rootCleanup(content);
-            while(content.indexOf(VAR) !== -1){
-                content = variableCleanup(content);
-            }
-
-            while(content.indexOf(CALC) !== -1){
-                content = calcCleanup(content);
-            }
-
-            let pattern = '[^a-zA-Z0-9](--([a-zA-Z0-9]+))';
-            let variableRegexp = new RegExp(pattern, "g");
-            content = content.replace(variableRegexp, '$$$2');
-
-            let newContent = content;
+            content = processContent(content);
 
             if (dest) {
                 let outputFile = fs.createWriteStream(dest);
 
                 outputFile.once('open', function (fd) {
-                    outputFile.write(newContent);
+                    outputFile.write(content);
                     outputFile.end();
                 });
                 outputFile.on('close', function () {
@@ -148,14 +144,13 @@ module.exports = {
                 let outputFile = fs.createWriteStream(src);
 
                 outputFile.once('open', function (fd) {
-                    outputFile.write(newContent);
+                    outputFile.write(content);
                     outputFile.end();
                 });
                 outputFile.on('close', function () {
                     resolve(src);
                 });
             }
-
 
         });
 

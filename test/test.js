@@ -32,7 +32,7 @@ let sanitize = function(content){
 };
 
 let compareIgnoringWhiteCharacters = function(result, expected){
-    chai.expect(sanitize(result)).to.equalIgnoreSpaces(sanitize(expected));
+    expect(sanitize(result)).to.equalIgnoreSpaces(sanitize(expected));
 };
 
 describe('css-variables-to-sass', function () {
@@ -51,6 +51,10 @@ describe('css-variables-to-sass', function () {
 
     it('respects BEM-like element--modifiers', function (done) {
         jsTest('bem', {}, done);
+    });
+
+    it('handles complex files', function (done) {
+        jsTest('real', {}, done);
     });
 
 });
