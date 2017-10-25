@@ -1,5 +1,4 @@
-const //should = require('should'),
-    fs = require('fs'),
+const fs = require('fs'),
     path = require('path'),
     plugin = require('../'),
     chai = require('chai');
@@ -55,4 +54,5 @@ describe('css-variables-to-sass', function () {
     });
 
 });
+
 
