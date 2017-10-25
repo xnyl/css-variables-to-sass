@@ -1,5 +1,5 @@
 {
-  "name": "sass-to-css-variables",
+  "name": "css-variables-to-sass",
   "version": "0.0.1-alpha.1",
   "description": "Convert stylesheets from CSS --variables to SASS $variables",
   "main": "index.js",

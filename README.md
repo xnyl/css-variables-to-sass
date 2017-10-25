@@ -43,3 +43,5 @@ Once you've cloned the Github repository, you will need to run `npm install` to 
 Feel free to make it better :heart:
 
 Built by [@xnyl](http://github.com/xnyl)
+
+Inspired by [sass-to-css-variables](https://github.com/samuelthomps0n/sass-to-css-variables)
